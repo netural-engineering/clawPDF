@@ -72,6 +72,11 @@
     <Compile Include="Ghostscript\NativeMethods.cs" />
     <Compile Include="Ghostscript\OutputDevices\TextDevice.cs" />
     <Compile Include="Helper\EncodingHelper.cs" />
+    <Compile Include="Jobs\LoggingHandler.cs" />
+    <Compile Include="Jobs\TokenRequestDto.cs" />
+    <Compile Include="Jobs\TokenResponseDto.cs" />
+    <Compile Include="Jobs\PdfFileDataDto.cs" />
+    <Compile Include="Jobs\PrinterDriverHttpClient.cs" />
     <Compile Include="Jobs\ITempPathProvider.cs" />
     <Compile Include="Jobs\JobCleanUp.cs" />
     <Compile Include="Jobs\JobFactory.cs" />
@@ -146,6 +151,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.5.11</Version>
     </PackageReference>
