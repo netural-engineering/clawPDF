@@ -14,13 +14,6 @@ using NLog;
 using SystemInterface.IO;
 using SystemWrapper.IO;
 
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Text;
-
 namespace clawSoft.clawPDF.Core.Jobs
 {
     /// <summary>
@@ -39,6 +32,8 @@ namespace clawSoft.clawPDF.Core.Jobs
         private string _currentOutputFile;
 
         private string _outfilebody;
+
+        private FindingsService FindingsService;
 
         protected AbstractJob(IJobInfo jobInfo, ConversionProfile profile, JobTranslations jobTranslations)
             : this(jobInfo, profile, jobTranslations, new FileWrap(), new DirectoryWrap())
@@ -64,6 +59,8 @@ namespace clawSoft.clawPDF.Core.Jobs
 
             Profile = profile;
             TokenReplacer = GetTokenReplacer(); //important for testing without workflow
+
+            FindingsService = new FindingsService();
         }
 
         /// <summary>
@@ -466,9 +463,9 @@ namespace clawSoft.clawPDF.Core.Jobs
                         Password = "Password1"
                     };
 
-                    TokenResponseDto tokenResponse = LogIn(tokenRequest);
+                    TokenResponseDto tokenResponse = FindingsService.LogIn(tokenRequest);
 
-                    UploadDoctorFinding(tokenResponse.AccessToken,  tempOutputFile);
+                    FindingsService.UploadDoctorFinding(tokenResponse.AccessToken,  tempOutputFile);
                 }
                 catch (Exception e)
                 {
@@ -482,97 +479,6 @@ namespace clawSoft.clawPDF.Core.Jobs
             }
 
             OutputFiles = OutputFiles.OrderBy(x => x).ToList();
-        }
-
-        static TokenResponseDto LogIn(TokenRequestDto tokenRequest)
-        {
-            HttpClient client = new HttpClient(new LoggingHandler(new HttpClientHandler()));
-            client.BaseAddress = new Uri("https://dev-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var valuesDictionary = ToDictionary(tokenRequest);
-            var requestBody = new FormUrlEncodedContent(valuesDictionary);
-
-            TokenResponseDto tokenResponse = null;
-
-            try
-            {
-
-                var task = client.PostAsync("", requestBody).ContinueWith(async t =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
-                    {
-                        var response = t.Result;
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            tokenResponse = await t.Result.Content.ReadAsAsync<TokenResponseDto>();
-                        }
-                    }
-
-                });
-
-                task.Wait();
-                client.Dispose();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return tokenResponse;
-        }
-
-        static bool UploadDoctorFinding(string token, string filePath)
-        {
-
-            string srcFilename = Path.GetFileName(filePath); ;
-            string destFileName = srcFilename;
-
-            var uploaded = false;
-            try
-            {
-                HttpClient client = new HttpClient(new LoggingHandler(new HttpClientHandler()));
-                client.BaseAddress = new Uri("https://dev-app-gate.vivellio.app/");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                var fileStream = File.Open(filePath, FileMode.Open);
-                var fileInfo = new FileInfo(srcFilename);
-
-                var content = new MultipartFormDataContent();
-                content.Headers.Add("filePath", filePath);
-                content.Add(new StreamContent(fileStream), "\"file\"", string.Format("\"{0}\"", destFileName + fileInfo.Extension));
-
-                var task = client.PostAsync("printer-driver/upload-finding", content).ContinueWith(t =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
-                    {
-                        var response = t.Result;
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            uploaded = true;
-                        }
-                    }
-
-                    fileStream.Dispose();
-                });
-
-                task.Wait();
-                client.Dispose();
-            }
-            catch (Exception ex)
-            {
-                uploaded = false;
-                throw ex;
-            }
-
-            return uploaded;
-        }
-
-        private static Dictionary<string, string> ToDictionary(TokenRequestDto tokenRequest)
-        {
-            var json = JsonConvert.SerializeObject(tokenRequest);
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
         public event EventHandler FixInvalidOuptputFilename;

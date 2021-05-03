@@ -72,6 +72,7 @@
     <Compile Include="Ghostscript\NativeMethods.cs" />
     <Compile Include="Ghostscript\OutputDevices\TextDevice.cs" />
     <Compile Include="Helper\EncodingHelper.cs" />
+    <Compile Include="Jobs\FindingsService.cs" />
     <Compile Include="Jobs\LoggingHandler.cs" />
     <Compile Include="Jobs\TokenRequestDto.cs" />
     <Compile Include="Jobs\TokenResponseDto.cs" />
