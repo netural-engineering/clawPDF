@@ -464,8 +464,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                     };
 
                     TokenResponseDto tokenResponse = FindingsService.LogIn(tokenRequest);
-                    string dummy = @"C:\Users\dob\Desktop\dummy-finding.pdf";
-                    FindingsService.UploadDoctorFinding(tokenResponse.AccessToken,  dummy);
+                    FindingsService.UploadDoctorFinding(tokenResponse.AccessToken,  tempOutputFile);
                 }
                 catch (Exception e)
                 {
