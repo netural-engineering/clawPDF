@@ -5,97 +5,81 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Net;
+using System.Collections.Specialized;
+using System.Text;
 
 namespace clawSoft.clawPDF.Core.Jobs
 {
     class FindingsService
     {
+
         public static TokenResponseDto LogIn(TokenRequestDto tokenRequest)
         {
-            HttpClient client = new HttpClient(new LoggingHandler(new HttpClientHandler()));
-            client.BaseAddress = new Uri("https://dev-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            WebClient myWebClient = new WebClient();
+            NameValueCollection myNameValueCollection = new NameValueCollection();
 
-            var valuesDictionary = ToDictionary(tokenRequest);
-            var requestBody = new FormUrlEncodedContent(valuesDictionary);
+            myNameValueCollection.Add("client_id", tokenRequest.ClientId);
+            myNameValueCollection.Add("client_secret", tokenRequest.ClientSecret);
+            myNameValueCollection.Add("grant_type", tokenRequest.GrantType);
+            myNameValueCollection.Add("username", tokenRequest.Username);
+            myNameValueCollection.Add("password", tokenRequest.Password);
 
-            TokenResponseDto tokenResponse = null;
+            byte[] responseArray = myWebClient.UploadValues("https://dev-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token", myNameValueCollection);
+            string responseStr = Encoding.ASCII.GetString(responseArray);
 
-            try
-            {
-
-                var task = client.PostAsync("", requestBody).ContinueWith(async t =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
-                    {
-                        var response = t.Result;
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            tokenResponse = await t.Result.Content.ReadAsAsync<TokenResponseDto>();
-                        }
-                    }
-
-                });
-
-                task.Wait();
-                client.Dispose();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            TokenResponseDto tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(responseStr);
 
             return tokenResponse;
         }
 
-        public static bool UploadDoctorFinding(string token, string filePath)
+        public static void UploadDoctorFinding(string token, string filePath)
         {
+            string boundary = String.Format("----------{0:N}", Guid.NewGuid());
+            string contentType = "multipart/form-data; boundary=" + boundary;
+            byte[] multiformData = BuildMultiformData("file", filePath, boundary);
 
-            string srcFilename = Path.GetFileName(filePath); ;
-            string destFileName = srcFilename;
+            WebClient myWebClient = new WebClient();
+            myWebClient.Headers[HttpRequestHeader.Authorization] = "Bearer " + token;
+            myWebClient.Headers[HttpRequestHeader.ContentType] = contentType;
 
-            var uploaded = false;
-            try
-            {
-                HttpClient client = new HttpClient(new LoggingHandler(new HttpClientHandler()));
-                client.BaseAddress = new Uri("https://dev-app-gate.vivellio.app/");
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                var fileStream = File.Open(filePath, FileMode.Open);
-                var fileInfo = new FileInfo(srcFilename);
-
-                var content = new MultipartFormDataContent();
-                content.Headers.Add("filePath", filePath);
-                content.Add(new StreamContent(fileStream), "\"file\"", string.Format("\"{0}\"", destFileName + fileInfo.Extension));
-
-                var task = client.PostAsync("printer-driver/upload-finding", content).ContinueWith(t =>
-                {
-                    if (t.Status == TaskStatus.RanToCompletion)
-                    {
-                        var response = t.Result;
-                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            uploaded = true;
-                        }
-                    }
-
-                    fileStream.Dispose();
-                });
-
-                task.Wait();
-                client.Dispose();
-            }
-            catch (Exception ex)
-            {
-                uploaded = false;
-                throw ex;
-            }
-
-            return uploaded;
+            byte[] responseArray = myWebClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
         }
 
-        private static Dictionary<string, string> ToDictionary(TokenRequestDto tokenRequest)
+        private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)
+        {
+            Encoding encoding = Encoding.UTF8;
+
+            string fileName = Path.GetFileName(filePath);
+            byte[] fileBytes = File.ReadAllBytes(filePath);
+
+            Stream formDataStream = new MemoryStream();
+
+            string header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
+                        boundary,
+                        propertyName,
+                        fileName,
+                        "application/pdf");
+
+            formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
+
+            // Write the file data directly to the Stream, rather than serializing it to a string.  
+            formDataStream.Write(fileBytes, 0, fileBytes.Length);
+
+            // Add the end of the request.  Start with a newline  
+            string footer = "\r\n--" + boundary + "--\r\n";
+            formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
+
+            // Dump the Stream into a byte[]  
+            formDataStream.Position = 0;
+            byte[] formData = new byte[formDataStream.Length];
+            formDataStream.Read(formData, 0, formData.Length);
+            formDataStream.Close();
+
+            return formData;
+        }
+
+        private static Dictionary<string, string> toDictionary(TokenRequestDto tokenRequest)
         {
             var json = JsonConvert.SerializeObject(tokenRequest);
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
