@@ -43,7 +43,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             myWebClient.Headers[HttpRequestHeader.Authorization] = "Bearer " + token;
             myWebClient.Headers[HttpRequestHeader.ContentType] = contentType;
 
-            byte[] responseArray = myWebClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+            myWebClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
         }
 
         private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)
