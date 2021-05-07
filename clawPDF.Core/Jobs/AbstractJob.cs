@@ -457,7 +457,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                     TokenRequestDto tokenRequest = new TokenRequestDto
                     {
                         ClientId = "vivellio-printer-driver",
-                        ClientSecret = "c8564246-cbca-4f72-9a2c-35f80192a502",
+                        ClientSecret = "ae5506a2-02a0-407e-a96e-4b8415866b9c",
                         GrantType = "password",
                         Username = "vivellio.doctor@dispostable.com",
                         Password = "Password1"

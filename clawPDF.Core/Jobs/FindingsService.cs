@@ -25,7 +25,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             myNameValueCollection.Add("username", tokenRequest.Username);
             myNameValueCollection.Add("password", tokenRequest.Password);
 
-            byte[] responseArray = myWebClient.UploadValues("https://dev-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token", myNameValueCollection);
+            byte[] responseArray = myWebClient.UploadValues("https://qa-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token", myNameValueCollection);
             string responseStr = Encoding.ASCII.GetString(responseArray);
 
             TokenResponseDto tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(responseStr);
@@ -43,7 +43,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             myWebClient.Headers[HttpRequestHeader.Authorization] = "Bearer " + token;
             myWebClient.Headers[HttpRequestHeader.ContentType] = contentType;
 
-            myWebClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+            myWebClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
         }
 
         private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)
