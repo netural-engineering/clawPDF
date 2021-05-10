@@ -79,7 +79,7 @@ namespace clawSoft.clawPDF.Core.Settings
             }
             catch
             {
-                PrinterName = "clawPDF";
+                PrinterName = "Vivellio";
             }
 
             try
