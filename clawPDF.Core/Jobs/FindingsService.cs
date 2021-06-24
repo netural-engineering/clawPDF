@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Collections.Specialized;
 using System.Text;
+using Microsoft.Win32;
 
 namespace clawSoft.clawPDF.Core.Jobs
 {
     class FindingsService
     {
-
         public static TokenResponseDto LogIn(TokenRequestDto tokenRequest)
         {
             WebClient myWebClient = new WebClient();
@@ -83,6 +83,15 @@ namespace clawSoft.clawPDF.Core.Jobs
         {
             var json = JsonConvert.SerializeObject(tokenRequest);
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+        }
+
+        public static void GetKey()
+        {
+            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Vivellio\LICENSE");
+            object key = registryKey.GetValue("KEY");
+
+            Console.WriteLine("KEY=" + key);
+            //return key;
         }
     }
 }
