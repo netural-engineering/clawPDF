@@ -74,8 +74,8 @@
     <Compile Include="Helper\EncodingHelper.cs" />
     <Compile Include="Jobs\FindingsService.cs" />
     <Compile Include="Jobs\LoggingHandler.cs" />
-    <Compile Include="Jobs\TokenRequestDto.cs" />
-    <Compile Include="Jobs\TokenResponseDto.cs" />
+    <Compile Include="Jobs\MatchingPatientsDto.cs" />
+    <Compile Include="Jobs\PatientDto.cs" />
     <Compile Include="Jobs\PdfFileDataDto.cs" />
     <Compile Include="Jobs\PrinterDriverHttpClient.cs" />
     <Compile Include="Jobs\ITempPathProvider.cs" />

@@ -454,18 +454,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
                 try
                 {
-                    FindingsService.GetKey();
-                    //TokenRequestDto tokenRequest = new TokenRequestDto
-                    //{
-                    //    ClientId = "vivellio-printer-driver",
-                    //    ClientSecret = "ae5506a2-02a0-407e-a96e-4b8415866b9c",
-                    //    GrantType = "password",
-                    //    Username = "vivellio.doctor@dispostable.com",
-                    //    Password = "Password1"
-                    //};
-                    //
-                    //TokenResponseDto tokenResponse = FindingsService.LogIn(tokenRequest);
-                    //FindingsService.UploadDoctorFinding(tokenResponse.AccessToken,  tempOutputFile);
+                    MatchingPatientsDto matchingPatients = FindingsService.UploadDoctorFinding(tempOutputFile);
                 }
                 catch (Exception e)
                 {
