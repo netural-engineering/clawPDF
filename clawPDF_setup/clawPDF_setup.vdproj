@@ -3050,7 +3050,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_6D653F6EE3324579B145A191268F8DEA"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]clawpdf"
+            "DefaultLocation" = "8:[ProgramFilesFolder]vivellio"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -3154,7 +3154,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vivellio Postfach 1.0"
         "ProductCode" = "8:{9D6164D8-4236-401F-B986-5ECD16E60498}"
-        "PackageCode" = "8:{BEAEE7F9-C6D9-43C8-837F-C5AB6DED2FF3}"
+        "PackageCode" = "8:{3D48E7F4-9B5B-48C9-B621-9D68ABB55E25}"
         "UpgradeCode" = "8:{89201BDE-3821-4AC1-A058-67957B4FE188}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
