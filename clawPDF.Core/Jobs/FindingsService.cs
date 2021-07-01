@@ -20,14 +20,23 @@ namespace clawSoft.clawPDF.Core.Jobs
             string contentType = "multipart/form-data; boundary=" + boundary;
             byte[] multiformData = BuildMultiformData("file", filePath, boundary);
 
-            WebClient myWebClient = new WebClient();
-            myWebClient.Headers[HttpRequestHeader.ContentType] = contentType;
-            myWebClient.Headers["Driver-License-Key"] = GetKey();
+            WebClient webClient = new WebClient();
+            webClient.Headers[HttpRequestHeader.ContentType] = contentType;
+            webClient.Headers["Driver-License-Key"] = GetKey();
 
-            byte[] responseArray = myWebClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
-            string responseStr = Encoding.ASCII.GetString(responseArray);
 
-            return JsonConvert.DeserializeObject<MatchingPatientsDto>(responseStr);
+            try
+            {
+                byte[] responseArray = webClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+                string responseStr = Encoding.ASCII.GetString(responseArray);
+                return JsonConvert.DeserializeObject<MatchingPatientsDto>(responseStr);
+            }
+            catch (WebException e)
+            {
+                //if (e.Status.Equals(401))
+                return null;
+
+            }            
         }
 
         private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)

@@ -452,16 +452,8 @@ namespace clawSoft.clawPDF.Core.Jobs
                     }
                 }
 
-                try
-                {
-                    MatchingPatientsDto matchingPatients = FindingsService.UploadDoctorFinding(tempOutputFile);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                MatchingPatientsDto matchingPatients = FindingsService.UploadDoctorFinding(tempOutputFile);
                 
-
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);
                 isFirstFile = false;
