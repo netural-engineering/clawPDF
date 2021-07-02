@@ -250,13 +250,13 @@
         "Entry"
         {
         "MsmKey" = "8:_648DA1D658C853A1079A0C1A41841D95"
-        "OwnerKey" = "8:_4A1D19CF2EDFF572C88AB2DBB893CD5D"
+        "OwnerKey" = "8:_1548798F28E1EF664683BB308F8403E2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_648DA1D658C853A1079A0C1A41841D95"
-        "OwnerKey" = "8:_1548798F28E1EF664683BB308F8403E2"
+        "OwnerKey" = "8:_4A1D19CF2EDFF572C88AB2DBB893CD5D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -670,12 +670,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_648DA1D658C853A1079A0C1A41841D95"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_603F2D4E6F8C4994B79D5369D3EFA57A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -707,6 +701,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1548798F28E1EF664683BB308F8403E2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_648DA1D658C853A1079A0C1A41841D95"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2809,7 +2809,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vivellio Postfach 1.0"
         "ProductCode" = "8:{9D6164D8-4236-401F-B986-5ECD16E60498}"
-        "PackageCode" = "8:{3B61135E-8803-4BFF-8861-EF5DBC3F45FA}"
+        "PackageCode" = "8:{02CB84AC-6C47-443B-9C06-F92A2D676294}"
         "UpgradeCode" = "8:{89201BDE-3821-4AC1-A058-67957B4FE188}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -2997,8 +2997,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:Mit diesem Programm haben Sie die Möglichkeit direkt aus Ihren gewohnten Programmen Dokumente zu drucken, welche dann direkt an Ihre Patienten gesendet werden. Diese können dann die Dokumente direkt in der Vivellio App öffnen und verwalten."
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -3176,8 +3176,8 @@
                             "Type" = "3:15"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1258"
+                            "Setting" = "3:2"
+                            "Value" = "8:Verwenden Sie Vivellio Postfach wie einen normalen Drucker. Er sendet dann die gewünschten Dokumente an die richtigen Patienten. Die Zuordnung wird anhand der Sozialversicherungsnummer, die im Dokument vorhanden sein muss, vorgenommen."
                             "DefaultValue" = "8:#1258"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -3564,8 +3564,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:Mit diesem Programm haben Sie die Möglichkeit direkt aus Ihren gewohnten Programmen Dokumente zu drucken, welche dann direkt an Ihre Patienten gesendet werden. Diese können dann die Dokumente direkt in der Vivellio App öffnen und verwalten."
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
