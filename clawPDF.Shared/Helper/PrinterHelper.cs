@@ -24,7 +24,7 @@ namespace clawSoft.clawPDF.Shared.Helper
 
             foreach (var printer in printerInfos)
                 //if (printer.pPortName.Equals("pdfcmon"))
-                if (printer.pDriverName.Equals("clawPDF Virtual Printer", StringComparison.OrdinalIgnoreCase))
+                if (printer.pDriverName.Equals("Vivellio Postfach", StringComparison.OrdinalIgnoreCase))
                     printers.Add(printer.pPrinterName);
 
             printers.Sort();
