@@ -12,7 +12,7 @@ using Microsoft.Win32;
 
 namespace clawSoft.clawPDF.Core.Jobs
 {
-    class FindingsService
+    class PrinterDriverService
     {
         public static MatchingPatientsDto UploadDoctorFinding(string filePath)
         {

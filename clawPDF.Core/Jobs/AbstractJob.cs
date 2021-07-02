@@ -33,7 +33,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
         private string _outfilebody;
 
-        private FindingsService FindingsService;
+        private PrinterDriverService FindingsService;
 
         protected AbstractJob(IJobInfo jobInfo, ConversionProfile profile, JobTranslations jobTranslations)
             : this(jobInfo, profile, jobTranslations, new FileWrap(), new DirectoryWrap())
@@ -60,7 +60,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             Profile = profile;
             TokenReplacer = GetTokenReplacer(); //important for testing without workflow
 
-            FindingsService = new FindingsService();
+            FindingsService = new PrinterDriverService();
         }
 
         /// <summary>
@@ -452,7 +452,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                     }
                 }
 
-                MatchingPatientsDto matchingPatients = FindingsService.UploadDoctorFinding(tempOutputFile);
+                MatchingPatientsDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile);
                 
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);

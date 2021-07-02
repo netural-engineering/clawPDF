@@ -72,7 +72,7 @@
     <Compile Include="Ghostscript\NativeMethods.cs" />
     <Compile Include="Ghostscript\OutputDevices\TextDevice.cs" />
     <Compile Include="Helper\EncodingHelper.cs" />
-    <Compile Include="Jobs\FindingsService.cs" />
+    <Compile Include="Jobs\PrinterDriverService.cs" />
     <Compile Include="Jobs\LoggingHandler.cs" />
     <Compile Include="Jobs\MatchingPatientsDto.cs" />
     <Compile Include="Jobs\PatientDto.cs" />
