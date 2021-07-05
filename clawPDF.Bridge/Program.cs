@@ -24,7 +24,7 @@ namespace clawPDF.Bridge
         {
             INIFile iniFile = new INIFile(infFile);
             string username = iniFile.Read("0", "Username");
-            ProcessExtensions.StartProcessAsUser(username, Path.GetDirectoryName(Application.ExecutablePath) + @"\" + "clawPDF.exe", Path.GetDirectoryName(Application.ExecutablePath) + @"\" + "clawPDF.exe" + " /INFODATAFILE=" + infFile, Path.GetDirectoryName(Application.ExecutablePath), true);
+            ProcessExtensions.StartProcessAsUser(username, Path.GetDirectoryName(Application.ExecutablePath) + @"\" + "Vivellio Postfach.exe", Path.GetDirectoryName(Application.ExecutablePath) + @"\" + "Vivellio Postfach.exe" + " /INFODATAFILE=" + infFile, Path.GetDirectoryName(Application.ExecutablePath), true);
         }
     }
 }

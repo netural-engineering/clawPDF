@@ -56,7 +56,7 @@ namespace clawSoft.clawPDF.Assistants
                 //Logger.Debug("Done: {0}", uninstallResult);
 
                 Logger.Debug("Reinstalling Printers...");
-                var clawPdfPath = _pathSafe.Combine(applicationPath, "clawPDF.exe");
+                var clawPdfPath = _pathSafe.Combine(applicationPath, "Vivellio Postfach.exe");
 
                 var printerNameString = GetPrinterNameString(printerNames);
 

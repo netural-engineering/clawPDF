@@ -75,7 +75,7 @@ namespace clawSoft.clawPDF.SetupHelper.Driver
                     clawmonpath = Path.GetDirectoryName(Application.ExecutablePath) + @"\clawmon\x86\";
                 }
 
-                if (installer.InstallclawPDFPrinter(clawmonpath, "clawPDF.exe"))
+                if (installer.InstallclawPDFPrinter(clawmonpath, "Vivellio Postfach.exe"))
                     printerInstalled = true;
                 else
                     printerInstalled = false;

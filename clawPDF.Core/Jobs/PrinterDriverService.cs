@@ -12,38 +12,31 @@ using Microsoft.Win32;
 
 namespace clawSoft.clawPDF.Core.Jobs
 {
-    class FindingsService
+    class PrinterDriverService
     {
-        public static TokenResponseDto LogIn(TokenRequestDto tokenRequest)
-        {
-            WebClient myWebClient = new WebClient();
-            NameValueCollection myNameValueCollection = new NameValueCollection();
-
-            myNameValueCollection.Add("client_id", tokenRequest.ClientId);
-            myNameValueCollection.Add("client_secret", tokenRequest.ClientSecret);
-            myNameValueCollection.Add("grant_type", tokenRequest.GrantType);
-            myNameValueCollection.Add("username", tokenRequest.Username);
-            myNameValueCollection.Add("password", tokenRequest.Password);
-
-            byte[] responseArray = myWebClient.UploadValues("https://qa-identity.vivellio.app/auth/realms/Vivellio/protocol/openid-connect/token", myNameValueCollection);
-            string responseStr = Encoding.ASCII.GetString(responseArray);
-
-            TokenResponseDto tokenResponse = JsonConvert.DeserializeObject<TokenResponseDto>(responseStr);
-
-            return tokenResponse;
-        }
-
-        public static void UploadDoctorFinding(string token, string filePath)
+        public static MatchingPatientsDto UploadDoctorFinding(string filePath)
         {
             string boundary = String.Format("----------{0:N}", Guid.NewGuid());
             string contentType = "multipart/form-data; boundary=" + boundary;
             byte[] multiformData = BuildMultiformData("file", filePath, boundary);
 
-            WebClient myWebClient = new WebClient();
-            myWebClient.Headers[HttpRequestHeader.Authorization] = "Bearer " + token;
-            myWebClient.Headers[HttpRequestHeader.ContentType] = contentType;
+            WebClient webClient = new WebClient();
+            webClient.Headers[HttpRequestHeader.ContentType] = contentType;
+            webClient.Headers["Driver-License-Key"] = GetKey();
 
-            myWebClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+
+            try
+            {
+                byte[] responseArray = webClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+                string responseStr = Encoding.ASCII.GetString(responseArray);
+                return JsonConvert.DeserializeObject<MatchingPatientsDto>(responseStr);
+            }
+            catch (WebException e)
+            {
+                //if (e.Status.Equals(401))
+                return null;
+
+            }            
         }
 
         private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)
@@ -79,19 +72,16 @@ namespace clawSoft.clawPDF.Core.Jobs
             return formData;
         }
 
-        private static Dictionary<string, string> toDictionary(TokenRequestDto tokenRequest)
+        private static Dictionary<string, string> toDictionary(MatchingPatientsDto tokenRequest)
         {
             var json = JsonConvert.SerializeObject(tokenRequest);
             return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
-        public static void GetKey()
+        private static string GetKey()
         {
             RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Vivellio\LICENSE");
-            object key = registryKey.GetValue("KEY");
-
-            Console.WriteLine("KEY=" + key);
-            //return key;
+            return (string) registryKey.GetValue("KEY");
         }
     }
 }

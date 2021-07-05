@@ -170,12 +170,12 @@ namespace clawSoft.clawPDF.SetupHelper
 
         private static void RegisterComInterface(bool wow6432)
         {
-            CallRegAsmForShell(wow6432, "clawPDF.exe", "/codebase /tlb");
+            CallRegAsmForShell(wow6432, "Vivellio Postfach.exe", "/codebase /tlb");
         }
 
         private static void UnregisterComInterface(bool wow6432)
         {
-            CallRegAsmForShell(wow6432, "clawPDF.exe", "/unregister");
+            CallRegAsmForShell(wow6432, "Vivellio Postfach.exe", "/unregister");
         }
 
         private static void CallRegAsmForShell(bool wow6432, string fileName, string parameters)

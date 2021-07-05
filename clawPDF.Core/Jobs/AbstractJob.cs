@@ -33,7 +33,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
         private string _outfilebody;
 
-        private FindingsService FindingsService;
+        private PrinterDriverService FindingsService;
 
         protected AbstractJob(IJobInfo jobInfo, ConversionProfile profile, JobTranslations jobTranslations)
             : this(jobInfo, profile, jobTranslations, new FileWrap(), new DirectoryWrap())
@@ -60,7 +60,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             Profile = profile;
             TokenReplacer = GetTokenReplacer(); //important for testing without workflow
 
-            FindingsService = new FindingsService();
+            FindingsService = new PrinterDriverService();
         }
 
         /// <summary>
@@ -452,27 +452,8 @@ namespace clawSoft.clawPDF.Core.Jobs
                     }
                 }
 
-                try
-                {
-                    FindingsService.GetKey();
-                    //TokenRequestDto tokenRequest = new TokenRequestDto
-                    //{
-                    //    ClientId = "vivellio-printer-driver",
-                    //    ClientSecret = "ae5506a2-02a0-407e-a96e-4b8415866b9c",
-                    //    GrantType = "password",
-                    //    Username = "vivellio.doctor@dispostable.com",
-                    //    Password = "Password1"
-                    //};
-                    //
-                    //TokenResponseDto tokenResponse = FindingsService.LogIn(tokenRequest);
-                    //FindingsService.UploadDoctorFinding(tokenResponse.AccessToken,  tempOutputFile);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                MatchingPatientsDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile);
                 
-
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);
                 isFirstFile = false;

@@ -7,21 +7,19 @@ using Newtonsoft.Json;
 
 namespace clawSoft.clawPDF.Core.Jobs
 {
-    public class TokenRequestDto
+    public enum ResponseCodeDto
     {
-        [JsonProperty("client_id")]
-        public string ClientId { get; set; }
+        NO_MATCH = 0,
+        SINGLE_MATCH = 1,
+        MULTIPLE_MATCHES = 2
+    }
 
-        [JsonProperty("client_secret")]
-        public string ClientSecret { get; set; }
+    public class MatchingPatientsDto
+    {
+        [JsonProperty("responseCode")]
+        public ResponseCodeDto ResponseCode { get; set; }
 
-        [JsonProperty("grant_type")]
-        public string GrantType { get; set; }
-
-        [JsonProperty("username")]
-        public string Username { get; set; }
-
-        [JsonProperty("password")]
-        public string Password { get; set; }
+        [JsonProperty("patients")]
+        public List<PatientDto> Patients { get; set; }
     }
 }
