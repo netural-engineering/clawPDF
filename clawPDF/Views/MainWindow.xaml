@@ -8,7 +8,7 @@
         DragEnter="MainWindow_OnDragEnter"
         Drop="MainWindow_OnDrop"
         ResizeMode="CanMinimize"
-        Icon="../clawPDF.ico"
+        Icon="/Vivellio Postfach;component/favicon.ico"
         WindowStartupLocation="CenterScreen" x:ClassModifier="internal">
     <Grid>
         <Grid.Resources>

@@ -12,7 +12,7 @@
         DragEnter="OnDragEnter"
         Drop="OnDrop"
         ResizeMode="CanMinimize"
-        Icon="../clawPDF.ico"
+        Icon="../favicon.ico"
         Background="{x:Static SystemColors.ControlBrush}" x:ClassModifier="internal">
     <Grid>
         <Grid.Resources>
