@@ -2809,7 +2809,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vivellio Postfach 1.0"
         "ProductCode" = "8:{9D6164D8-4236-401F-B986-5ECD16E60498}"
-        "PackageCode" = "8:{02CB84AC-6C47-443B-9C06-F92A2D676294}"
+        "PackageCode" = "8:{AD996EA3-9F4E-43B7-BA16-E5CA01620D8B}"
         "UpgradeCode" = "8:{89201BDE-3821-4AC1-A058-67957B4FE188}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -3322,7 +3322,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:Bitte geben Sie den Lizenzschlüssel ein."
+                            "Value" = "8:Bitte geben Sie den Lizenzschlüssel ein. Er befindet sich im Vivellio Account unter Konto."
                             "DefaultValue" = "8:#1215"
                             "UsePlugInResources" = "11:TRUE"
                             }
