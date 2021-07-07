@@ -27,7 +27,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
             try
             {
-                byte[] responseArray = webClient.UploadData("https://dev-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
+                byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
                 return JsonConvert.DeserializeObject<MatchingPatientsDto>(responseStr);
             }

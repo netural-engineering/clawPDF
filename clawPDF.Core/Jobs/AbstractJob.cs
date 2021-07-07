@@ -33,7 +33,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
         private string _outfilebody;
 
-        private PrinterDriverService FindingsService;
+        private PrinterDriverService PrinterDriverService;
 
         protected AbstractJob(IJobInfo jobInfo, ConversionProfile profile, JobTranslations jobTranslations)
             : this(jobInfo, profile, jobTranslations, new FileWrap(), new DirectoryWrap())
@@ -60,7 +60,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             Profile = profile;
             TokenReplacer = GetTokenReplacer(); //important for testing without workflow
 
-            FindingsService = new PrinterDriverService();
+            PrinterDriverService = new PrinterDriverService();
         }
 
         /// <summary>
