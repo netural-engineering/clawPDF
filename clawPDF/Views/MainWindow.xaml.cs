@@ -11,6 +11,7 @@ namespace clawSoft.clawPDF.Views
         public MainWindow()
         {
             InitializeComponent();
+            ApplicationNameText.Text = "test";
         }
 
         private void AppSettingsButton_OnClick(object sender, RoutedEventArgs e)

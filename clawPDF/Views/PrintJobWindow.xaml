@@ -34,8 +34,23 @@
             <Label Target="{Binding ElementName=TitleText}" Name="TitleLabel">_Title</Label>
             <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
             <Label Target="{Binding ElementName=ProfileCombo}" Name="ProfileLabel">_Profile</Label>
-            <ComboBox Name="ProfileCombo" ItemsSource="{Binding ProfilesView}" DisplayMemberPath="Name"
-                      IsSynchronizedWithCurrentItem="True" />
+            <ComboBox Name="bodyPartsBox">
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Red">Head</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Green">Neck</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Blue">Blue</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
 
 
             <Grid Height="55">
