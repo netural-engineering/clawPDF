@@ -11,7 +11,6 @@ namespace clawSoft.clawPDF.Views
         public MainWindow()
         {
             InitializeComponent();
-            ApplicationNameText.Text = "test";
         }
 
         private void AppSettingsButton_OnClick(object sender, RoutedEventArgs e)
@@ -55,7 +54,7 @@ namespace clawSoft.clawPDF.Views
         {
             TranslationHelper.Instance.TranslatorInstance.Translate(this);
 
-            ApplicationNameText.Text = "clawPDF " + VersionHelper.Instance.FormatWithTwoDigits();
+            ApplicationNameText.Text = "Vivellio Postfach 1.0";
 
             var welcomeSettingsHelper = new WelcomeSettingsHelper();
             if (welcomeSettingsHelper.IsFirstRun())
