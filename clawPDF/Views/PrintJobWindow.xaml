@@ -34,7 +34,7 @@
             <Label Target="{Binding ElementName=TitleText}" Name="TitleLabel">_Title</Label>
             <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
             <Label Target="{Binding ElementName=ProfileCombo}" Name="ProfileLabel">_Profile</Label>
-            <ComboBox Name="bodyPartsBox">
+            <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="419">
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Foreground="Red">Head</TextBlock>
@@ -54,8 +54,7 @@
 
 
             <Grid Height="55">
-                <TextBlock TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="5 5"
-                           Text="{Binding PendingJobsText}" TextWrapping="Wrap" />
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Margin="5 5" TextWrapping="Wrap" />
             </Grid>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -66,9 +65,7 @@
 
                 <Button Style="{StaticResource GrayRoundButtonStyle}" IsDefault="True" Command="{Binding SaveCommand}"
                         Click="CommandButtons_OnClick">
-                    <Viewbox Margin="9">
-                        <ContentControl Foreground="White" Content="{StaticResource ImageSettings}" />
-                    </Viewbox>
+                    <Image Source="..\Resources\send.png" Width="20" Height="20"/>
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
