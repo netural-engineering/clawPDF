@@ -37,17 +37,42 @@
             <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="419">
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="Red">Head</TextBlock>
+                        <TextBlock Foreground="Pink">Kopf</TextBlock>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="Green">Neck</TextBlock>
+                        <TextBlock Foreground="Beige">Hals</TextBlock>
                     </StackPanel>
                 </ComboBoxItem>
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="Blue">Blue</TextBlock>
+                        <TextBlock Foreground="Yellow">Burst</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="LightBlue">Schulter, Arm, Hand</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Green">Bauch</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Red">Unterleib</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Orange">Bein</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="Blue">Rücken</TextBlock>
                     </StackPanel>
                 </ComboBoxItem>
             </ComboBox>
