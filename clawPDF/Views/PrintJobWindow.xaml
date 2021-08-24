@@ -90,7 +90,7 @@
                           StrokeThickness="5" Margin="10" />
                 </Button>
 
-                <Button Style="{StaticResource GrayRoundButtonStyle}" IsDefault="True" 
+                <Button Style="{StaticResource GrayRoundButtonStyle}" IsDefault="True" Command="{Binding SaveCommand}"
                         Click="CommandButtons_OnClick">
                     <Image Source="..\Resources\send.png" Width="20" Height="20"/>
                 </Button>
