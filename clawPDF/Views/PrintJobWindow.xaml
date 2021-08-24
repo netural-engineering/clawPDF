@@ -35,6 +35,7 @@
             <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
             <Label Target="{Binding ElementName=ProfileCombo}" Name="ProfileLabel">_Profile</Label>
             <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="409" Height="21">
+                <!--
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Foreground="Pink">Kopf</TextBlock>
@@ -75,6 +76,7 @@
                         <TextBlock Foreground="Blue">Rücken</TextBlock>
                     </StackPanel>
                 </ComboBoxItem>
+                -->
             </ComboBox>
 
 
@@ -88,7 +90,7 @@
                           StrokeThickness="5" Margin="10" />
                 </Button>
 
-                <Button Style="{StaticResource GrayRoundButtonStyle}" IsDefault="True" Command="{Binding SaveCommand}"
+                <Button Style="{StaticResource GrayRoundButtonStyle}" IsDefault="True" 
                         Click="CommandButtons_OnClick">
                     <Image Source="..\Resources\send.png" Width="20" Height="20"/>
                 </Button>

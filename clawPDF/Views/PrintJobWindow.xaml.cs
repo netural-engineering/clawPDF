@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using clawSoft.clawPDF.Core.Settings;
 using clawSoft.clawPDF.Helper;
 using clawSoft.clawPDF.Shared.Helper;
@@ -14,6 +15,7 @@ namespace clawSoft.clawPDF.Views
         public PrintJobWindow()
         {
             InitializeComponent();
+            InitBodyPartsComboBox();
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
@@ -54,6 +56,16 @@ namespace clawSoft.clawPDF.Views
         private void OnDrop(object sender, DragEventArgs e)
         {
             DragAndDropHelper.Drop(e);
+        }
+
+        private void InitBodyPartsComboBox()
+        {
+            var bodyParts = new List<string>() { "Kopf", "Hals", "Brust", "Schulter, Arm, Hand", "Bauch", "Unterleib", "Bein", "Rücken" };
+
+            foreach (string bp in bodyParts)
+            {
+                BodyPartsBox.Items.Add(bp);
+            }
         }
     }
 }
