@@ -169,6 +169,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                 Metadata.PrintJobName = titleReplacer.Replace(SourceFiles[0].DocumentTitle);
                 Metadata.Title = ""; //Set to avoid null exception when replacing tokens
                 Metadata.Author = "";
+                Metadata.BodyPart = ""; //Set to avoid null exception when replacing tokens
 
                 JobType = SourceFiles[0].Type;
             }

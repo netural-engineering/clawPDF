@@ -451,8 +451,8 @@ namespace clawSoft.clawPDF.Core.Jobs
                         }
                     }
                 }
-
-                MatchingPatientsDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile);
+                
+                MatchingPatientsDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile, JobInfo.Metadata);
                 
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);

@@ -154,6 +154,7 @@ namespace clawSoft.clawPDF.Core.Ghostscript.OutputDevices
             metadataContent.Append("\n/Keywords " + EncodeGhostscriptParametersHex(Job.JobInfo.Metadata.Keywords));
             metadataContent.Append("\n/Creator " + EncodeGhostscriptParametersHex(Job.JobInfo.Metadata.Producer));
             metadataContent.Append("\n/Producer " + EncodeGhostscriptParametersHex(Job.JobInfo.Metadata.Producer));
+            //metadataContent.Append("\n/BodyPart " + EncodeGhostscriptParametersHex(Job.JobInfo.Metadata.BodyPart));
             metadataContent.Append("\n/DOCINFO pdfmark");
 
             AddViewerSettingsToMetadataContent(metadataContent);

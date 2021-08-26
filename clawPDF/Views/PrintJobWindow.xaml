@@ -34,7 +34,7 @@
             <Label Target="{Binding ElementName=TitleText}" Name="TitleLabel">_Title</Label>
             <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
             <Label Target="{Binding ElementName=ProfileCombo}" Name="ProfileLabel">_Profile</Label>
-            <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="409" Height="21">
+            <ComboBox Name="BodyPartsBox" Text="{Binding Metadata.BodyPart}"  HorizontalAlignment="Left" Width="409" Height="21">
                 <!--
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">

@@ -50,6 +50,11 @@ namespace clawSoft.clawPDF.Core.Jobs
         public string Producer => "clawPDF " + _assemblyHelper.GetCurrentAssemblyVersion();
 
         /// <summary>
+        ///     Selected body part for the finding
+        /// </summary>
+        public string BodyPart { get; set; }
+
+        /// <summary>
         ///     Create an exact copy of this object. Changes to the copy will not affect the original and vice versa
         /// </summary>
         /// <returns>An exact copy of the object</returns>
@@ -62,7 +67,8 @@ namespace clawSoft.clawPDF.Core.Jobs
                 Author = Author,
                 PrintJobAuthor = PrintJobAuthor,
                 Subject = Subject,
-                Keywords = Keywords
+                Keywords = Keywords,
+                BodyPart = BodyPart
             };
 
             return metadata;
