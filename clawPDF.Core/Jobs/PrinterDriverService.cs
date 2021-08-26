@@ -14,16 +14,20 @@ namespace clawSoft.clawPDF.Core.Jobs
 {
     class PrinterDriverService
     {
-        public static MatchingPatientsDto UploadDoctorFinding(string filePath)
+        public static MatchingPatientsDto UploadDoctorFinding(string filePath, Metadata metadata)
         {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("file", filePath);
+            parameters.Add("title", metadata.Title);
+            parameters.Add("bodyPart", metadata.BodyPart);
+
             string boundary = String.Format("----------{0:N}", Guid.NewGuid());
             string contentType = "multipart/form-data; boundary=" + boundary;
-            byte[] multiformData = BuildMultiformData("file", filePath, boundary);
+            byte[] multiformData = BuildMultiformData(parameters, boundary);
 
             WebClient webClient = new WebClient();
             webClient.Headers[HttpRequestHeader.ContentType] = contentType;
             webClient.Headers["Driver-License-Key"] = GetKey();
-
 
             try
             {
@@ -39,31 +43,49 @@ namespace clawSoft.clawPDF.Core.Jobs
             }            
         }
 
-        private static byte[] BuildMultiformData(string propertyName, string filePath, string boundary)
+        private static byte[] BuildMultiformData(Dictionary<string, string> postParameters, string boundary)
         {
             Encoding encoding = Encoding.UTF8;
-
-            string fileName = Path.GetFileName(filePath);
-            byte[] fileBytes = File.ReadAllBytes(filePath);
-
             Stream formDataStream = new MemoryStream();
+            bool isNotFirstParam = false;
 
-            string header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
+            foreach (var param in postParameters)
+            {
+                if (isNotFirstParam)
+                {
+                    // add parameter as a separator
+                    formDataStream.Write(encoding.GetBytes("\r\n"), 0, encoding.GetByteCount("\r\n"));
+                }
+
+                isNotFirstParam = true;
+
+                if (param.Key is "file")
+                {
+                    string fileName = Path.GetFileName(param.Key);
+                    byte[] fileBytes = File.ReadAllBytes(param.Value);
+
+                    string header = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\"\r\nContent-Type: {3}\r\n\r\n",
                         boundary,
-                        propertyName,
-                        fileName,
+                        param.Key,
+                        param.Value,
                         "application/pdf");
 
-            formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
+                    formDataStream.Write(encoding.GetBytes(header), 0, encoding.GetByteCount(header));
+                    formDataStream.Write(fileBytes, 0, fileBytes.Length);
+                }
+                else
+                {
+                    string postData = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"\r\n\r\n{2}",
+                        boundary,
+                        param.Key,
+                        param.Value);
+                    formDataStream.Write(encoding.GetBytes(postData), 0, encoding.GetByteCount(postData));
+                }
+            }
 
-            // Write the file data directly to the Stream, rather than serializing it to a string.  
-            formDataStream.Write(fileBytes, 0, fileBytes.Length);
-
-            // Add the end of the request.  Start with a newline  
             string footer = "\r\n--" + boundary + "--\r\n";
             formDataStream.Write(encoding.GetBytes(footer), 0, encoding.GetByteCount(footer));
 
-            // Dump the Stream into a byte[]  
             formDataStream.Position = 0;
             byte[] formData = new byte[formDataStream.Length];
             formDataStream.Read(formData, 0, formData.Length);
