@@ -44,8 +44,6 @@ namespace clawSoft.clawPDF.Views
 
         private void CommandButtons_OnClick(object sender, RoutedEventArgs e)
         {
-            SetBodyPartDefaultValue();
-
             DialogResult = true;
             Close();
         }
@@ -68,12 +66,6 @@ namespace clawSoft.clawPDF.Views
             {
                 BodyPartsBox.Items.Add(bp);
             }
-        }
-
-        private void SetBodyPartDefaultValue()
-        {
-            BodyPartsBox.SelectedIndex = 0;
-            BodyPartsBox.SelectedValue = BodyPartsBox.Items[0];
         }
     }
 }
