@@ -5,6 +5,11 @@
         Pending,
         Cancelled,
         Failed,
-        Succeeded
+        Succeeded,
+        InvalidLicense,
+        NoMatch,
+        SingleMatch,
+        MultipleMatches,
+        Undefined
     }
 }

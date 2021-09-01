@@ -4,6 +4,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 {
     public enum ResponseCodeDto
     {
+        INVALID_KEY = -1,
         NO_MATCH = 0,
         SINGLE_MATCH = 1,
         MULTIPLE_MATCHES = 2

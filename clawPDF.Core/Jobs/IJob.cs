@@ -150,7 +150,7 @@ namespace clawSoft.clawPDF.Core.Jobs
         ///     the FilenameTemplate and stores them in the OutputFiles list.
         ///     For multiple files the FilenameTemplate gets an appendix.
         /// </summary>
-        void MoveOutputFiles();
+        JobState MoveOutputFiles();
 
         /// <summary>
         ///     Collect all output files for this device from tempFolder.

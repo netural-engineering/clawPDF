@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using clawSoft.clawPDF.Core;
 using clawSoft.clawPDF.Core.Actions;
@@ -44,6 +45,8 @@ namespace clawSoft.clawPDF.Workflow
 
         protected override void QueryTargetFile()
         {
+            Job.SkipSaveFileDialog = true;
+
             if (!Job.Profile.SkipPrintDialog)
             {
                 Job.ApplyMetadata();
@@ -341,6 +344,46 @@ namespace clawSoft.clawPDF.Workflow
                 errorText);
 
             MessageWindow.ShowTopMost(opener, caption, MessageWindowButtons.OK, MessageWindowIcon.Error);
+        }
+
+        protected override void NotifyUserAboutFindingUploadStatus(JobState jobState)
+        {
+            string messageText, caption;
+
+            switch (jobState)
+            {
+                case JobState.InvalidLicense:
+                    caption = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicenseCaption", "Finding Upload Result");
+                    messageText = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicense",
+                        "Invalid license key. Please reinstall the driver providing the license key contact support.");
+                    break;
+
+                case JobState.NoMatch:
+                    caption = _translator.GetTranslation("InteractiveWorkflow", "NoMatchCaption", "Finding Upload Result");
+                    messageText = _translator.GetTranslation("InteractiveWorkflow", "NoMatch",
+                        "The finding was not uploaded because no patient matches were found.");
+                    break;
+
+                case JobState.SingleMatch:
+                    caption = _translator.GetTranslation("InteractiveWorkflow", "SingleMatchCaption", "Finding Upload Result");
+                    messageText = _translator.GetTranslation("InteractiveWorkflow", "SingleMatch",
+                        "The finding upload was successful.");
+                    break;
+
+                case JobState.MultipleMatches:
+                    caption = _translator.GetTranslation("InteractiveWorkflow", "MultipleMatchesCaption", "Finding Upload Result");
+                    messageText = _translator.GetTranslation("InteractiveWorkflow", "MultipleMatches",
+                        "The finding was not uploaded because multiple matching patients were found.");
+                    break;
+
+                default:
+                    caption = _translator.GetTranslation("InteractiveWorkflow", "UnknownError", "Finding Upload Result");
+                    messageText = _translator.GetTranslation("InteractiveWorkflow", "UnknownError",
+                        "Unkown internal error");
+                    break;
+            }
+
+            MessageWindow.ShowTopMost(messageText, caption, MessageWindowButtons.Close, MessageWindowIcon.Info);
         }
 
         protected override bool EvaluateActionResult(ActionResult actionResult)
