@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Drawing.Printing;
+using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 using clawSoft.clawPDF.Core.Actions;
 using clawSoft.clawPDF.Core.Helper;
 using clawSoft.clawPDF.Core.Jobs;
@@ -179,7 +182,7 @@ namespace clawSoft.clawPDF.Workflow
 
             if (!Job.Success) NotifyUserAboutFailedJob();
 
-            NotifyUserAboutFindingUploadStatus(jobState);
+            DoVivellioWorkflow(jobState);
 
             WorkflowStep = WorkflowStep.Finished;
             OnJobFinished(EventArgs.Empty);
@@ -288,5 +291,52 @@ namespace clawSoft.clawPDF.Workflow
         protected abstract bool EvaluateActionResult(ActionResult actionResult);
 
         protected abstract void RetypeSmtpPassword(object sender, QueryPasswordEventArgs e);
+
+        private void DeleteOutputFiles()
+        {
+            foreach (var file in Job.OutputFiles)
+            {
+                if (File.Exists(file)) File.Delete(file);
+            }
+        }
+
+        private void PrintIfNoSingleMatcheIsFound(JobState jobState)
+        {
+            if (!jobState.Equals(JobState.SingleMatch)) 
+            {
+                PrintDialog printDlg = new PrintDialog();
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.DocumentName = Job.OutputFiles[0];
+                printDlg.Document = printDoc;
+                printDlg.AllowSelection = true;
+                printDlg.AllowSomePages = true;
+                printDlg.PrinterSettings.PrinterName = GetDefaultPhysicalPrinter();
+
+                //temporal condition, could be an option to keep since physical printer may not be 100% reliable.
+                if (printDlg.ShowDialog() == DialogResult.OK)
+                {
+                    printDoc.Print();
+                }
+            }
+        }
+
+        private string GetDefaultPhysicalPrinter()
+        {
+            Console.WriteLine("########################");
+            for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
+            {
+                Console.WriteLine(PrinterSettings.InstalledPrinters[i]);
+            }
+            Console.WriteLine("########################");
+
+            return PrinterSettings.InstalledPrinters[0];
+        }
+
+        private void DoVivellioWorkflow(JobState jobState)
+        {
+            NotifyUserAboutFindingUploadStatus(jobState);
+            PrintIfNoSingleMatcheIsFound(jobState);
+            DeleteOutputFiles();
+        }
     }
 }
