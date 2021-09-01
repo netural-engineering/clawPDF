@@ -1,20 +1,18 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Net;
-using System.Collections.Specialized;
 using System.Text;
 using Microsoft.Win32;
+using clawSoft.clawPDF.Core.Jobs;
+using clawSoft.clawPDF.PrinterDriver.Domain;
 
-namespace clawSoft.clawPDF.Core.Jobs
+namespace clawSoft.clawPDF.Core.PrinterDriver
 {
-    class PrinterDriverService
+    class PrinterDriverService : IPrinterDriverService
     {
-        public static MatchingPatientsDto UploadDoctorFinding(string filePath, Metadata metadata)
+        public MatchingResultDto UploadDoctorFinding(string filePath, Metadata metadata)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("file", filePath);
@@ -33,14 +31,29 @@ namespace clawSoft.clawPDF.Core.Jobs
             {
                 byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/upload-finding", "POST", multiformData);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
-                return JsonConvert.DeserializeObject<MatchingPatientsDto>(responseStr);
+                return JsonConvert.DeserializeObject<MatchingResultDto>(responseStr);
             }
             catch (WebException e)
             {
-                //if (e.Status.Equals(401))
                 return null;
-
             }            
+        }
+
+        public bool ValidateLicense(string licenseKey)
+        {
+            WebClient webClient = new WebClient();
+
+            try
+            {
+                byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/notify-installation" + licenseKey, "POST", null);
+                string responseStr = Encoding.ASCII.GetString(responseArray);
+                InstallationNotificationDto validationResult = JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
+                return validationResult.Result;
+            }
+            catch (WebException e)
+            {
+                return false;
+            }
         }
 
         private static byte[] BuildMultiformData(Dictionary<string, string> postParameters, string boundary)
@@ -92,12 +105,6 @@ namespace clawSoft.clawPDF.Core.Jobs
             formDataStream.Close();
 
             return formData;
-        }
-
-        private static Dictionary<string, string> toDictionary(MatchingPatientsDto tokenRequest)
-        {
-            var json = JsonConvert.SerializeObject(tokenRequest);
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
         private static string GetKey()

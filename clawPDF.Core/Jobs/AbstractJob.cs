@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using clawSoft.clawPDF.Core.Actions;
 using clawSoft.clawPDF.Core.Ghostscript.OutputDevices;
+using clawSoft.clawPDF.Core.PrinterDriver;
 using clawSoft.clawPDF.Core.Settings;
 using clawSoft.clawPDF.Core.Settings.Enums;
 using clawSoft.clawPDF.PDFProcessing;
+using clawSoft.clawPDF.PrinterDriver.Domain;
 using clawSoft.clawPDF.Utilities;
 using clawSoft.clawPDF.Utilities.IO;
 using clawSoft.clawPDF.Utilities.Tokens;
@@ -33,7 +35,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
         private string _outfilebody;
 
-        private PrinterDriverService PrinterDriverService;
+        private IPrinterDriverService PrinterDriverService;
 
         protected AbstractJob(IJobInfo jobInfo, ConversionProfile profile, JobTranslations jobTranslations)
             : this(jobInfo, profile, jobTranslations, new FileWrap(), new DirectoryWrap())
@@ -454,7 +456,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                     }
                 }
                 
-                MatchingPatientsDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile, JobInfo.Metadata);
+                MatchingResultDto matchingPatients = PrinterDriverService.UploadDoctorFinding(tempOutputFile, JobInfo.Metadata);
                 
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);
