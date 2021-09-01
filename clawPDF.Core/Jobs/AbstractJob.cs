@@ -301,10 +301,12 @@ namespace clawSoft.clawPDF.Core.Jobs
             Logger.Trace("Starting job");
 
             var calledJobCompleted = false;
+            JobState currentFindingUploadResult = JobState.Undefined;
 
             try
             {
                 JobState = RunJobWork();
+                currentFindingUploadResult = JobState;
 
                 if (JobState == JobState.Cancelled)
                 {
@@ -342,7 +344,7 @@ namespace clawSoft.clawPDF.Core.Jobs
 
                 Logger.Trace("Starting Actions");
 
-                CallActions();
+                //CallActions();//not openning the pinted file
 
                 DoAutoCleanup();
 
@@ -357,7 +359,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                 }
             }
 
-            return JobState;
+            return currentFindingUploadResult;
         }
 
         public void AddAction(IAction action)
@@ -411,7 +413,7 @@ namespace clawSoft.clawPDF.Core.Jobs
             foreach (var file in files) TempOutputFiles.Add(file);
         }
 
-        public void MoveOutputFiles()
+        public JobState MoveOutputFiles()
         {
             //Ensure the the first file is the first in TempOutputFiles
             TempOutputFiles = TempOutputFiles.OrderBy(x => x).ToList();
@@ -430,7 +432,7 @@ namespace clawSoft.clawPDF.Core.Jobs
                 if (isFirstFile && !Profile.AutoSave.Enabled && OnRetypeOutputFilename != null)
                 {
                     if (!CopyFileWithInteractiveOutputFilenameTemplateQuery(tempOutputFile, num, extension))
-                        return; //cancelled by user
+                        break; //cancelled by user
                 }
                 else
                 {
@@ -457,9 +459,12 @@ namespace clawSoft.clawPDF.Core.Jobs
                 DeleteFile(tempOutputFile);
                 OutputFiles.Add(_currentOutputFile);
                 isFirstFile = false;
+
+                return MapToJobState(matchingPatients.ResponseCode);
             }
 
             OutputFiles = OutputFiles.OrderBy(x => x).ToList();
+            return JobState.Succeeded;
         }
 
         public event EventHandler FixInvalidOuptputFilename;
@@ -706,6 +711,18 @@ namespace clawSoft.clawPDF.Core.Jobs
             catch (IOException)
             {
                 Logger.Warn("Could not delete temporary file \"" + tempfile + "\"");
+            }
+        }
+
+        private JobState MapToJobState(ResponseCodeDto responseCode)
+        {
+            switch (responseCode)
+            {
+                case ResponseCodeDto.INVALID_KEY: return JobState.InvalidLicense;
+                case ResponseCodeDto.NO_MATCH: return JobState.NoMatch;
+                case ResponseCodeDto.SINGLE_MATCH: return JobState.SingleMatch;
+                case ResponseCodeDto.MULTIPLE_MATCHES: return JobState.MultipleMatches;
+                default: return JobState.Succeeded;
             }
         }
     }

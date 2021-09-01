@@ -86,6 +86,10 @@ namespace clawSoft.clawPDF.Workflow
             // maybe do something here?
         }
 
+        protected override void NotifyUserAboutFindingUploadStatus(JobState jobState)
+        {
+        }
+
         protected override bool EvaluateActionResult(ActionResult actionResult)
         {
             return actionResult.Success;

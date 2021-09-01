@@ -98,6 +98,8 @@ namespace clawSoft.clawPDF.Workflow
         /// </summary>
         protected abstract void NotifyUserAboutFailedJob();
 
+        protected abstract void NotifyUserAboutFindingUploadStatus(JobState jobState);
+
         public event EventHandler JobFinished;
 
         /// <summary>
@@ -173,9 +175,11 @@ namespace clawSoft.clawPDF.Workflow
             if (Job.Profile.ShowProgress)
                 ShowConversionProgress();
 
-            Job.RunJob();
+            JobState jobState = Job.RunJob();
 
             if (!Job.Success) NotifyUserAboutFailedJob();
+
+            NotifyUserAboutFindingUploadStatus(jobState);
 
             WorkflowStep = WorkflowStep.Finished;
             OnJobFinished(EventArgs.Empty);

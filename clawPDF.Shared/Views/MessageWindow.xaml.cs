@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Media;
@@ -62,8 +63,15 @@ namespace clawSoft.clawPDF.Shared.Views
 
                 case MessageWindowButtons.OK:
                     RightButton.Visibility = Visibility.Visible;
-                    RightButton.Content = translator.GetTranslation("MessageWindow", "Ok", "OK");
+                    RightButton.Content = translator.GetTranslation("MessageWindow", "OK", "OK");
                     RightButton.IsDefault = true;
+                    break;
+
+                case MessageWindowButtons.Close:
+                    LeftButton.Content = translator.GetTranslation("MessageWindow", "Close", "Close");
+                    LeftButton.IsDefault = true;
+                    
+                    RightButton.Visibility = Visibility.Collapsed;
                     break;
 
                 case MessageWindowButtons.OKCancel:
@@ -186,7 +194,8 @@ namespace clawSoft.clawPDF.Shared.Views
         OKCancel,
         RetryCancel,
         YesNo,
-        YesLaterNo
+        YesLaterNo,
+        Close
     }
 
     public enum MessageWindowIcon

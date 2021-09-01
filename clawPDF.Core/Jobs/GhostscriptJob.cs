@@ -213,10 +213,9 @@ namespace clawSoft.clawPDF.Core.Jobs
                 ProcessOutput();
 
                 Logger.Trace("Moving output files to final location");
-                MoveOutputFiles();
-
+                JobState = MoveOutputFiles();
                 Logger.Trace("Finished Ghostscript Job");
-                JobState = JobState.Succeeded;
+                
                 return JobState;
             }
             catch (ProcessingException)
