@@ -10,8 +10,9 @@ using clawSoft.clawPDF.PrinterDriver.Domain;
 
 namespace clawSoft.clawPDF.Core.PrinterDriver
 {
-    class PrinterDriverService : IPrinterDriverService
+    public class PrinterDriverService : IPrinterDriverService
     {
+        public PrinterDriverService() { }
         public MatchingResultDto UploadDoctorFinding(string filePath, Metadata metadata)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -39,7 +40,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
             }            
         }
 
-        public bool ValidateLicense(string licenseKey)
+        public InstallationNotificationDto ValidateLicense(string licenseKey)
         {
             WebClient webClient = new WebClient();
 
@@ -47,12 +48,11 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
             {
                 byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/notify-installation" + licenseKey, "POST", null);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
-                InstallationNotificationDto validationResult = JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
-                return validationResult.Result;
+                return JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
             }
             catch (WebException e)
             {
-                return false;
+                return null;
             }
         }
 
