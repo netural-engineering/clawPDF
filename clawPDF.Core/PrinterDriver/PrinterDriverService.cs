@@ -46,7 +46,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
 
             try
             {
-                byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/notify-installation" + licenseKey, "POST", null);
+                byte[] responseArray = webClient.UploadData("https://qa-app-gate.vivellio.app/printer-driver/notify-installation/" + licenseKey, "POST", null);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
                 return JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
             }
