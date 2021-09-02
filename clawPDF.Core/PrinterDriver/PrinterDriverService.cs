@@ -15,7 +15,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
         private string baseUrl;
         public PrinterDriverService() 
         {
-            baseUrl = "https://dev-app-gate.vivellio.app/printer-driver";
+            baseUrl = "https://qa-app-gate.vivellio.app/printer-driver";
         }
         public MatchingResultDto UploadDoctorFinding(string filePath, Metadata metadata)
         {
