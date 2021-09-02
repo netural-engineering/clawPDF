@@ -72,11 +72,11 @@
     <Compile Include="Ghostscript\NativeMethods.cs" />
     <Compile Include="Ghostscript\OutputDevices\TextDevice.cs" />
     <Compile Include="Helper\EncodingHelper.cs" />
-    <Compile Include="Jobs\PrinterDriverService.cs" />
+    <Compile Include="PrinterDriver\Domain\InstallationNotificationDto.cs" />
+    <Compile Include="PrinterDriver\IPrinterDriverService.cs" />
+    <Compile Include="PrinterDriver\PrinterDriverService.cs" />
     <Compile Include="Jobs\LoggingHandler.cs" />
-    <Compile Include="Jobs\MatchingPatientsDto.cs" />
-    <Compile Include="Jobs\PatientDto.cs" />
-    <Compile Include="Jobs\PdfFileDataDto.cs" />
+    <Compile Include="PrinterDriver\Domain\MatchingResultDto.cs" />
     <Compile Include="Jobs\ITempPathProvider.cs" />
     <Compile Include="Jobs\JobCleanUp.cs" />
     <Compile Include="Jobs\JobFactory.cs" />

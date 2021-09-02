@@ -196,6 +196,12 @@
         "Entry"
         {
         "MsmKey" = "8:_4A1D19CF2EDFF572C88AB2DBB893CD5D"
+        "OwnerKey" = "8:_7F78C114226A455AA68D0A82851D76E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4A1D19CF2EDFF572C88AB2DBB893CD5D"
         "OwnerKey" = "8:_4DDB12BE3A8A71E8EA490C69041D08B8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -858,6 +864,20 @@
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
             "Identifier" = "8:_2C937D3C_F478_4374_9DDA_DF057CCCA855"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_B57DE7AA18A34F0991D158E6459D9163"
+            {
+            "Name" = "8:NotifyInstallation"
+            "Condition" = "8:"
+            "Object" = "8:_7F78C114226A455AA68D0A82851D76E8"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:/Driver=NotifyInstall"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:3"
+            "Identifier" = "8:_D5E055AB_851A_4249_B3A4_263F018E1458"
             "InstallerClass" = "11:FALSE"
             "CustomActionData" = "8:"
             }
@@ -2780,7 +2800,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Vivellio Postfach 1.0"
         "ProductCode" = "8:{9D6164D8-4236-401F-B986-5ECD16E60498}"
-        "PackageCode" = "8:{2CC63DF7-CF17-4CCF-9C42-143CC4754617}"
+        "PackageCode" = "8:{9EF30C3B-782F-4020-933A-168B21CE17EE}"
         "UpgradeCode" = "8:{89201BDE-3821-4AC1-A058-67957B4FE188}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace clawSoft.clawPDF.Core.Jobs
+namespace clawSoft.clawPDF.PrinterDriver.Domain
 {
     public enum ResponseCodeDto
     {
@@ -10,12 +10,9 @@ namespace clawSoft.clawPDF.Core.Jobs
         MULTIPLE_MATCHES = 2
     }
 
-    public class MatchingPatientsDto
+    public class MatchingResultDto
     {
         [JsonProperty("responseCode")]
         public ResponseCodeDto ResponseCode { get; set; }
-
-        //[JsonProperty("patients")]
-        //public List<PatientDto> Patients { get; set; }
     }
 }
