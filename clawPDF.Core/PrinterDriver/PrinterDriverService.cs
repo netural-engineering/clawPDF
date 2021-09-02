@@ -15,7 +15,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
         private string baseUrl;
         public PrinterDriverService() 
         {
-            baseUrl = "https://qa-app-gate.vivellio.app/printer-driver";
+            baseUrl = "https://dev-app-gate.vivellio.app/printer-driver";
         }
         public MatchingResultDto UploadDoctorFinding(string filePath, Metadata metadata)
         {
@@ -44,13 +44,13 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
             }            
         }
 
-        public InstallationNotificationDto ValidateLicense(string licenseKey)
+        public InstallationNotificationDto ValidateLicense()
         {
             WebClient webClient = new WebClient();
 
             try
             {
-                byte[] responseArray = webClient.UploadData(baseUrl + "/notify-installation/" + licenseKey, "POST", new byte[0]);
+                byte[] responseArray = webClient.UploadData(baseUrl + "/notify-installation/" + GetKey(), "POST", new byte[0]);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
                 return JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
             }

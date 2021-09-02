@@ -11,6 +11,6 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
     public interface IPrinterDriverService
     {
         MatchingResultDto UploadDoctorFinding(string filePath, Metadata metadata);
-        InstallationNotificationDto ValidateLicense(string licenseKey);
+        InstallationNotificationDto ValidateLicense();
     }
 }
