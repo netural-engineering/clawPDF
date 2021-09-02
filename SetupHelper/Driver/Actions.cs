@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using clawSoft.clawPDF.Core.PrinterDriver;
+using clawSoft.clawPDF.PrinterDriver.Domain;
 using clawSoft.clawPDF.SetupHelper.Helper;
 
 namespace clawSoft.clawPDF.SetupHelper.Driver
@@ -99,6 +101,14 @@ namespace clawSoft.clawPDF.SetupHelper.Driver
             finally
             { }
             return printerUninstalled;
+        }
+
+        public static bool NotifyInstallation()
+        {
+            IPrinterDriverService printerDriverService = new PrinterDriverService();
+            InstallationNotificationDto installationNotification = printerDriverService.ValidateLicense();
+
+            return installationNotification.Result;
         }
     }
 }

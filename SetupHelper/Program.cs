@@ -30,7 +30,9 @@ namespace clawSoft.clawPDF.SetupHelper
                         case "Remove":
                             Actions.UninstallclawPDFPrinter();
                             break;
-
+                        case "NotifyInstall":
+                            Actions.NotifyInstallation();
+                            break;
                         default:
                             showUsage = true;
                             break;
