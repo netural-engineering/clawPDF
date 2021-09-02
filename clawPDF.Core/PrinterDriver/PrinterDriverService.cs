@@ -50,7 +50,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
 
             try
             {
-                byte[] responseArray = webClient.UploadData(baseUrl + "/notify-installation/" + licenseKey, "POST", null);
+                byte[] responseArray = webClient.UploadData(baseUrl + "/notify-installation/" + licenseKey, "POST", new byte[0]);
                 string responseStr = Encoding.ASCII.GetString(responseArray);
                 return JsonConvert.DeserializeObject<InstallationNotificationDto>(responseStr);
             }
