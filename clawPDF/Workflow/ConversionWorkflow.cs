@@ -16,6 +16,7 @@ using clawSoft.clawPDF.Utilities;
 using clawSoft.clawPDF.Utilities.Threading;
 using clawSoft.clawPDF.Views;
 using NLog;
+using PdfiumViewer;
 
 namespace clawSoft.clawPDF.Workflow
 {
@@ -296,46 +297,68 @@ namespace clawSoft.clawPDF.Workflow
         {
             foreach (var file in Job.OutputFiles)
             {
-                if (File.Exists(file)) File.Delete(file);
-            }
-        }
-
-        private void PrintIfNoSingleMatcheIsFound(JobState jobState)
-        {
-            if (!jobState.Equals(JobState.SingleMatch)) 
-            {
-                PrintDialog printDlg = new PrintDialog();
-                PrintDocument printDoc = new PrintDocument();
-                printDoc.DocumentName = Job.OutputFiles[0];
-                printDlg.Document = printDoc;
-                printDlg.AllowSelection = true;
-                printDlg.AllowSomePages = true;
-                printDlg.PrinterSettings.PrinterName = GetDefaultPhysicalPrinter();
-
-                //temporal condition, could be an option to keep since physical printer may not be 100% reliable.
-                if (printDlg.ShowDialog() == DialogResult.OK)
+                if (File.Exists(file))
                 {
-                    printDoc.Print();
+                    File.Delete(file);
                 }
             }
         }
 
-        private string GetDefaultPhysicalPrinter()
+        private void PrintIfNoSingleMatchIsFound(JobState jobState)
         {
-            Console.WriteLine("########################");
-            for (int i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
+            if (!jobState.Equals(JobState.SingleMatch))
             {
-                Console.WriteLine(PrinterSettings.InstalledPrinters[i]);
-            }
-            Console.WriteLine("########################");
+                var file = Job.OutputFiles[0];
 
-            return PrinterSettings.InstalledPrinters[0];
+                try
+                {
+                    LogControl.Write("Opening PDF to print: " + file);
+                    PdfDocument document = PdfDocument.Load(file);
+                    //LogControl.Write(document.GetPdfText(0));
+
+                    PrintDocument printDocument = document.CreatePrintDocument();
+                    printDocument.PrinterSettings.PrintFileName = file;
+                    printDocument.PrinterSettings.PrintToFile = true;
+
+                    PrintDialog printDlg = new PrintDialog();
+                    printDlg.Document = printDocument;
+                    printDlg.AllowSelection = true;
+                    printDlg.AllowSomePages = true;
+                    printDlg.AllowPrintToFile = false;
+                    printDlg.PrinterSettings = printDocument.PrinterSettings;
+
+                    LogControl.Write("opening print dialog...");
+
+                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    {
+                        LogControl.Write("PRINTING FILE (pritnDocument): " + printDocument.PrinterSettings.PrintFileName);
+                        LogControl.Write("using printer (pritnDocument): " + printDocument.PrinterSettings.PrinterName);
+
+                        try
+                        {
+                            printDocument.Print();
+                        }
+                        catch (Exception e)
+                        {
+                            LogControl.Write("print exception: " + e.Message);
+                        }
+
+                        LogControl.Write("finished printing the file");
+                    }
+
+                    document.Dispose();
+                }
+                catch (Exception e)
+                {
+                    LogControl.Write(e.Message);
+                }
+            }
         }
 
         private void DoVivellioWorkflow(JobState jobState)
         {
             NotifyUserAboutFindingUploadStatus(jobState);
-            PrintIfNoSingleMatcheIsFound(jobState);
+            PrintIfNoSingleMatchIsFound(jobState);
             DeleteOutputFiles();
         }
     }

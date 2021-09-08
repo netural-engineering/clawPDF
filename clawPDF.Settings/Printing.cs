@@ -20,6 +20,8 @@ namespace clawSoft.clawPDF.Core.Settings
     /// </summary>
     public class Printing
     {
+        private const string PRINTERNAME = "An Vivellio senden";
+
         public Printing()
         {
             Init();
@@ -49,7 +51,7 @@ namespace clawSoft.clawPDF.Core.Settings
         {
             Duplex = DuplexPrint.Disable;
             Enabled = false;
-            PrinterName = "clawPDF";
+            PrinterName = PRINTERNAME;
             SelectPrinter = SelectPrinter.ShowDialog;
         }
 
@@ -79,7 +81,7 @@ namespace clawSoft.clawPDF.Core.Settings
             }
             catch
             {
-                PrinterName = "An Vivellio senden";
+                PrinterName = PRINTERNAME;
             }
 
             try
