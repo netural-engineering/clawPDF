@@ -1,22 +1,42 @@
 # clawPDF // PDFCreator 2.3 fork
 
-Yet another PDF Printer? Yes! This PDF Printer has the intention to be completely open source.<br><br>
-Open Source virtual PDF printer for Windows 7 / 8 / 10 / 2008 / R2 / 2016 / 2019<br>
-Print to PDF, PDF/A, PDF/X, PNG, JPEG, TIF and text
+Yet another PDF Printer? Yes! This PDF Printer has the intention to be completely open source.
 
-# Download
-
-https://github.com/clawsoftware/clawPDF/releases/download/0.8.4/clawPDF_0.8.4_setup.msi
 
 # Tested under
 
 - Windows Server 2016 RDS/Terminalserver
-- Windows 10 x32/x64
+- Windows 10 x64
 - Windows 8 x32/x64
 - Windows 7 x32/x64
 
 
 # Changelog
+
+## v0.8.4 (2021.09.06)
+
+The PDF printer was modified to send documents to the Vivellio project backend to be assigned to a single patient.
+
+- Installation process:
+	- German language as default.
+	- Branded installation with Vivellio logo.
+	- Input of a printer driver license.
+	- Adding installation custom action to send an installation notification to the Vivellio project backend.
+	- Application icon.
+	- Renamed clawPDF output.
+	- Installation package name.
+- UI changes: 
+	- Main Window:
+		- Removal of the "Application Settings" and "Profile Settings" buttons.
+		- Replaced icon.
+	- PrintJobWindow:
+		- Removal of the buttons: "Setting", "Collect" and "E-Mail"
+		- Renamed "Save" Button to "Send" and changed it's icon.
+		- The following input elements were removed: "Profile", "Metadaten", "Thema", "Password" and "Autor".
+		- The following input elements were added: "Body part selection".
+- Print process:
+	- The document to print is sent to the Vivellio backend for processing.
+	- If the result is not a single match the document is print to a default physical printer.
 
 ## v0.8.4 (2019.06.11)
 
@@ -31,7 +51,7 @@ https://github.com/clawsoftware/clawPDF/releases/download/0.8.4/clawPDF_0.8.4_se
 
 ## v0.8.01 (2019.02.10)
 
-- [bugfix] performance boost for RDS environments
+- performance boost for RDS environments
 
 ## v0.8.0 (2019.02.10)
 
@@ -59,9 +79,6 @@ https://github.com/clawsoftware/clawPDF/releases/download/0.8.4/clawPDF_0.8.4_se
 ![clawpdf1](clawPDF/docs/images/clawpdf1.png?raw=true "clawpdf1")
 ![clawpdf2](clawPDF/docs/images/clawpdf2.png?raw=true "clawpdf2")
 ![clawpdf3](clawPDF/docs/images/clawpdf3.png?raw=true "clawpdf3")
-![clawpdf4](clawPDF/docs/images/clawpdf4.png?raw=true "clawpdf4")
-![clawpdf5](clawPDF/docs/images/clawpdf5.png?raw=true "clawpdf5")
-![clawpdf6](clawPDF/docs/images/clawpdf6.png?raw=true "clawpdf6")
 
 
 # Roadmap

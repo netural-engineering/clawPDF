@@ -258,6 +258,8 @@ namespace clawSoft.clawPDF.COM
                 if (JobInfo.SourceFiles.Count != 0)
                 {
                     Logger.Trace("COM: Creating workflow");
+                    
+                    LogControl.Write("DoConversion: " + _job.OutputFiles[0]);
 
                     _workflow = new ComWorkflow(_job, SettingsHelper.Settings);
 
