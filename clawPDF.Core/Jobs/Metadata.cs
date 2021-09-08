@@ -55,6 +55,11 @@ namespace clawSoft.clawPDF.Core.Jobs
         public string BodyPart { get; set; }
 
         /// <summary>
+        ///     Selected finding type 
+        /// </summary>
+        public string FindingType { get; set; }
+
+        /// <summary>
         ///     Create an exact copy of this object. Changes to the copy will not affect the original and vice versa
         /// </summary>
         /// <returns>An exact copy of the object</returns>
@@ -68,7 +73,8 @@ namespace clawSoft.clawPDF.Core.Jobs
                 PrintJobAuthor = PrintJobAuthor,
                 Subject = Subject,
                 Keywords = Keywords,
-                BodyPart = BodyPart
+                BodyPart = BodyPart,
+                FindingType = FindingType
             };
 
             return metadata;

@@ -23,6 +23,7 @@ namespace clawSoft.clawPDF.Core.PrinterDriver
             parameters.Add("file", filePath);
             parameters.Add("title", metadata.Title);
             parameters.Add("bodyPart", metadata.BodyPart);
+            parameters.Add("findingType", metadata.FindingType);
 
             string boundary = String.Format("----------{0:N}", Guid.NewGuid());
             string contentType = "multipart/form-data; boundary=" + boundary;

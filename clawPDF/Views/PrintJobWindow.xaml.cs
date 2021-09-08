@@ -17,6 +17,7 @@ namespace clawSoft.clawPDF.Views
         {
             InitializeComponent();
             InitBodyPartsComboBox();
+            InitFindingTypes();
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
@@ -72,10 +73,23 @@ namespace clawSoft.clawPDF.Views
             BodyPartsBox.SelectedIndex = 0;
         }
 
+        private void InitFindingTypes()
+        {
+            var findingTypes = new List<string>() { "Allergie", "Labor", "Bildbefund", "Arztbrief" };
+
+            foreach (string ft in findingTypes)
+            {
+                FindingTypeBox.Items.Add(ft);
+            }
+
+            FindingTypeBox.SelectedIndex = 0;
+        }
+
         private void SetMetadata()
         {
             var vm = (PrintJobViewModel)DataContext;
             vm.Metadata.BodyPart = BodyPartsBox.SelectedItem.ToString();
+            vm.Metadata.FindingType = FindingTypeBox.SelectedItem.ToString();
         }
     }
 }

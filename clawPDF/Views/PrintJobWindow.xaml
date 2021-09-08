@@ -32,9 +32,11 @@
             <ContentControl Content="" Width="150" HorizontalAlignment="Right"
                             Margin="10 15 0 -15" IsTabStop="False" />
             <Label Target="{Binding ElementName=TitleText}" Name="TitleLabel">_Title</Label>
-            <TextBox Name="TitleText" Text="{Binding Metadata.Title}" />
+            <TextBox Name="TitleText" Text="{Binding Metadata.Title}" Height="24" />
+            <Label Name="FindingTypeLabel">_Definition des Befundes</Label>
+            <ComboBox Name="FindingTypeBox" HorizontalAlignment="Left" Width="409" Height="24"/>
             <Label Name="ProfileLabel">_Profile</Label>
-            <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="409" Height="21">
+            <ComboBox Name="BodyPartsBox" HorizontalAlignment="Left" Width="409" Height="24">
                 <!--
                 <ComboBoxItem>
                     <StackPanel Orientation="Horizontal">
