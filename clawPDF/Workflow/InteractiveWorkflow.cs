@@ -349,6 +349,7 @@ namespace clawSoft.clawPDF.Workflow
         protected override void NotifyUserAboutFindingUploadStatus(JobState jobState)
         {
             string messageText, caption;
+            MessageWindowIcon icon = MessageWindowIcon.Info;
 
             switch (jobState)
             {
@@ -356,24 +357,28 @@ namespace clawSoft.clawPDF.Workflow
                     caption = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicenseCaption", "Finding Upload Result");
                     messageText = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicense",
                         "Invalid license key. Please reinstall the driver providing the license key contact support.");
+                    icon = MessageWindowIcon.NoSingleMatch;
                     break;
 
                 case JobState.NoMatch:
                     caption = _translator.GetTranslation("InteractiveWorkflow", "NoMatchCaption", "Finding Upload Result");
                     messageText = _translator.GetTranslation("InteractiveWorkflow", "NoMatch",
                         "The finding was not uploaded because no patient matches were found.");
+                    icon = MessageWindowIcon.NoSingleMatch;
                     break;
 
                 case JobState.SingleMatch:
                     caption = _translator.GetTranslation("InteractiveWorkflow", "SingleMatchCaption", "Finding Upload Result");
                     messageText = _translator.GetTranslation("InteractiveWorkflow", "SingleMatch",
                         "The finding upload was successful.");
+                    icon = MessageWindowIcon.SingleMatch;
                     break;
 
                 case JobState.MultipleMatches:
                     caption = _translator.GetTranslation("InteractiveWorkflow", "MultipleMatchesCaption", "Finding Upload Result");
                     messageText = _translator.GetTranslation("InteractiveWorkflow", "MultipleMatches",
                         "The finding was not uploaded because multiple matching patients were found.");
+                    icon = MessageWindowIcon.NoSingleMatch;
                     break;
 
                 default:
@@ -383,7 +388,7 @@ namespace clawSoft.clawPDF.Workflow
                     break;
             }
 
-            MessageWindow.ShowTopMost(messageText, caption, MessageWindowButtons.Close, MessageWindowIcon.Info);
+            MessageWindow.ShowTopMost(messageText, caption, MessageWindowButtons.Close, icon);
         }
 
         protected override bool EvaluateActionResult(ActionResult actionResult)

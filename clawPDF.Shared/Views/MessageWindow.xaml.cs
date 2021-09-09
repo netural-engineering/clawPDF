@@ -165,6 +165,18 @@ namespace clawSoft.clawPDF.Shared.Views
                 case MessageWindowIcon.None:
                     IconBox.Visibility = Visibility.Collapsed;
                     break;
+
+                case MessageWindowIcon.SingleMatch:
+                    img.Source = ConvertBitmap(Properties.Resources.SingleMatch.ToBitmap());
+                    IconBox.Content = img;
+                    SystemSounds.Asterisk.Play();
+                    break;
+
+                case MessageWindowIcon.NoSingleMatch:
+                    img.Source = ConvertBitmap(Properties.Resources.NoMultiMatch.ToBitmap());
+                    IconBox.Content = img;
+                    SystemSounds.Exclamation.Play();
+                    break;
             }
         }
 
@@ -207,6 +219,8 @@ namespace clawSoft.clawPDF.Shared.Views
         Exclamation,
         Question,
         Info,
-        None
+        None,
+        SingleMatch,
+        NoSingleMatch
     }
 }
