@@ -202,6 +202,7 @@
     <Compile Include="Helper\SettingsHelper.cs" />
     <Compile Include="Workflow\LogControl.cs" />
     <Compile Include="Workflow\WorkflowFactory.cs" />
+    <Resource Include="Resources\processing.png" />
     <Resource Include="Resources\send.png" />
     <None Include="clawmon\x64\pscript.hlp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
