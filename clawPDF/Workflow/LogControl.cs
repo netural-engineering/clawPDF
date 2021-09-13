@@ -10,15 +10,15 @@ namespace clawSoft.clawPDF.Workflow
     public class LogControl
     {
         private static string _Path = string.Empty;
-        private static bool WRITE_LOG = true;
-        private static bool DEBUG = true;
+        private static bool WRITE_LOG = false;
+        private static bool DEBUG = false;
 
         public static void Write(string msg)
         {
             if (WRITE_LOG)
             {
                 //_Path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                _Path = @"C:\Users\dob\Desktop";
+                _Path = @"C:\";
 
                 try
                 {
