@@ -299,12 +299,16 @@
     <None Include="languages\English.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="clawmon\x64\clawmon.dll" />
+    <Content Include="clawmon\x64\clawmonui.dll" />
     <Content Include="clawmon\x64\ps5ui.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="clawmon\x64\pscript5.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="clawmon\x86\clawmon.dll" />
+    <Content Include="clawmon\x86\clawmonui.dll" />
     <Content Include="clawmon\x86\ps5ui.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
