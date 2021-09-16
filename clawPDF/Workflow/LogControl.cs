@@ -18,8 +18,8 @@ namespace clawSoft.clawPDF.Workflow
             if (WRITE_LOG)
             {
                 //_Path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                _Path = @"C:\";
-
+                _Path = @"C:\Users\" + Environment.UserName + @"\Desktop";
+                
                 try
                 {
                     using (StreamWriter w = File.AppendText(Path.Combine(_Path, "log.txt")))
@@ -32,6 +32,8 @@ namespace clawSoft.clawPDF.Workflow
                 catch (Exception e)
                 {
                     //Handle
+                    Console.WriteLine("coudln't write log");
+                    Console.WriteLine(e.Message);
                 }
             }
         }
