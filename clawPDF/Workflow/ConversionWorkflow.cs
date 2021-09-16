@@ -326,24 +326,30 @@ namespace clawSoft.clawPDF.Workflow
                     printDlg.AllowSomePages = true;
                     printDlg.AllowPrintToFile = false;
                     printDlg.PrinterSettings = printDocument.PrinterSettings;
+                    printDlg.Document.DocumentName = Path.GetFileName(file);
 
                     LogControl.Write("opening print dialog...");
 
-                    if (printDlg.ShowDialog() == DialogResult.OK)
+                    try
                     {
-                        LogControl.Write("PRINTING FILE (pritnDocument): " + printDocument.PrinterSettings.PrintFileName);
-                        LogControl.Write("using printer (pritnDocument): " + printDocument.PrinterSettings.PrinterName);
-
-                        try
+                        if (printDlg.ShowDialog() == DialogResult.OK)
                         {
-                            printDocument.Print();
-                        }
-                        catch (Exception e)
-                        {
-                            LogControl.Write("print exception: " + e.Message);
-                        }
+                            try
+                            {
+                                LogControl.Write("selected printer: " + printDlg.Document.PrinterSettings.PrinterName);
+                                LogControl.Write("print dialog settings (file name): " + printDlg.Document.PrinterSettings);
 
-                        LogControl.Write("finished printing the file");
+                                printDocument.Print();
+                            }
+                            catch (Exception e)
+                            {
+                                LogControl.Write("print exception: " + e.Message);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        LogControl.Write("print dialog exception: " + e.Message);
                     }
 
                     document.Dispose();
@@ -352,6 +358,8 @@ namespace clawSoft.clawPDF.Workflow
                 {
                     LogControl.Write(e.Message);
                 }
+
+                LogControl.Write("finished printing the file");
             }
         }
 
