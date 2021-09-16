@@ -513,12 +513,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B4C159AECF064AF2BAF89AD9C8CF65D3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_BA030A70787475A7F2E2BD106E973CDB"
         "OwnerKey" = "8:_9383C2032F1D2552864D16A830DCCBB0"
         "MsmSig" = "8:_UNDEFINED"
@@ -2348,26 +2342,6 @@
             "TargetName" = "8:Estonian.ini"
             "Tag" = "8:"
             "Folder" = "8:_25DCCE0FB86246B0BAA4F57F940E53E1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B4C159AECF064AF2BAF89AD9C8CF65D3"
-            {
-            "SourcePath" = "8:..\\_Build\\Release\\gsdll32.dll"
-            "TargetName" = "8:gsdll32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_6D653F6EE3324579B145A191268F8DEA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
