@@ -40,13 +40,13 @@
             <Button DockPanel.Dock="Left" Name="HelpButton" Background="Transparent" Height="50" Width="50" Margin="30 10"
                     Cursor="{x:Static Cursors.Hand}" Template="{StaticResource RoundButtonStyle}" Foreground="Gray"
                     FontWeight="Bold" FontFamily="Calibri" FontSize="50" Click="HelpButton_Click" Content="{StaticResource Info}" />
-
+<!--
             <Button DockPanel.Dock="Right" Name="ProfileSettingsButton" Content="Profile Settings"
                     Style="{StaticResource ButtonStyle}" Click="ProfileSettingsButton_OnClick" />
             
             <Button DockPanel.Dock="Right" Name="AppSettingsButton" Content="Application Settings"
                     Style="{StaticResource ButtonStyle}" Click="AppSettingsButton_OnClick" />
-            
+-->
 
         </DockPanel>
     </Grid>
