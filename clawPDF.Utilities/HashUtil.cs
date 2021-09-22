@@ -13,12 +13,12 @@ namespace clawSoft.clawPDF.Utilities
         /// <returns>hashed text</returns>
         public static string GetSha1Hash(string text)
         {
-            var SHA1 = new SHA1CryptoServiceProvider();
+            var SHA256 = SHA256Managed.Create();
 
             string result = null;
 
             var arrayData = Encoding.ASCII.GetBytes(text);
-            var arrayResult = SHA1.ComputeHash(arrayData);
+            var arrayResult = SHA256.ComputeHash(arrayData);
 
             for (var i = 0; i < arrayResult.Length; i++)
             {

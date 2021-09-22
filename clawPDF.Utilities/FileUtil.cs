@@ -305,11 +305,11 @@ namespace clawSoft.clawPDF.Utilities
             var fileCheck = File.OpenRead(path);
 
             // calculate MD5-Hash from Byte-Array
-            MD5 hashAlgorithm = new MD5CryptoServiceProvider();
-            var md5Hash = hashAlgorithm.ComputeHash(fileCheck);
+            var hashProvider = SHA256Managed.Create();
+            var hash = hashProvider.ComputeHash(fileCheck);
             fileCheck.Close();
 
-            var md5 = BitConverter.ToString(md5Hash).Replace("-", "").ToLowerInvariant();
+            var md5 = BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
             return md5;
         }
 
