@@ -13,7 +13,7 @@ Yet another PDF Printer? Yes! This PDF Printer has the intention to be completel
 
 # Changelog
 
-## v0.8.4 (2021.09.06)
+## v0.8.4 (2021.09.22)
 - Updated the hash algorithm to SHA256.
 - Updated to a secure random number generator.
 
