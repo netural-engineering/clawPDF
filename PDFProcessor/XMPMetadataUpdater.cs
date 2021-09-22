@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using clawSoft.clawPDF.Core.Settings;
@@ -196,10 +197,21 @@ namespace clawSoft.clawPDF.PDFProcessing
         /// <returns>A string that contains random chars.</returns>
         private static string GetRandomString(int length)
         {
-            var rnd = new Random();
+            string allowableChars = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var allowable = allowableChars.ToCharArray();
+            var allowableLength = allowable.Length;
+
+            var rnd = new byte[length];
+            var rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(rnd);
+
             var sb = new StringBuilder();
+
             for (var i = 0; i < length; i++)
-                sb.Append(Convert.ToChar((byte)rnd.Next(254)).ToString(CultureInfo.InvariantCulture));
+            {
+                sb.Append(allowable[rnd[i] % allowableLength]);
+            }
+
             return sb.ToString();
         }
 
