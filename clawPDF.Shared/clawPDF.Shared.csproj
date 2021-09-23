@@ -340,6 +340,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\error.ico" />
     <Content Include="Resources\no-multi-match.ico" />
     <Content Include="Resources\single-match.ico" />
   </ItemGroup>

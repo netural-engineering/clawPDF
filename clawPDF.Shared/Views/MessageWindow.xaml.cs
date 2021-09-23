@@ -177,6 +177,11 @@ namespace clawSoft.clawPDF.Shared.Views
                     IconBox.Content = img;
                     SystemSounds.Exclamation.Play();
                     break;
+                case MessageWindowIcon.DriverError:
+                    img.Source = ConvertBitmap(Properties.Resources.DriverError.ToBitmap());
+                    IconBox.Content = img;
+                    SystemSounds.Exclamation.Play();
+                    break;
             }
         }
 
@@ -221,6 +226,7 @@ namespace clawSoft.clawPDF.Shared.Views
         Info,
         None,
         SingleMatch,
-        NoSingleMatch
+        NoSingleMatch,
+        DriverError
     }
 }

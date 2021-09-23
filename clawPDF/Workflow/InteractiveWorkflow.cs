@@ -357,7 +357,7 @@ namespace clawSoft.clawPDF.Workflow
                     caption = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicenseCaption", "Finding Upload Result");
                     messageText = _translator.GetTranslation("InteractiveWorkflow", "InvalidLicense",
                         "Invalid license key. Please reinstall the driver providing the license key contact support.");
-                    icon = MessageWindowIcon.NoSingleMatch;
+                    icon = MessageWindowIcon.DriverError;
                     break;
 
                 case JobState.NoMatch:
