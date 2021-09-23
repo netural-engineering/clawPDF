@@ -41,11 +41,11 @@
                     Cursor="{x:Static Cursors.Hand}" Template="{StaticResource RoundButtonStyle}" Foreground="Gray"
                     FontWeight="Bold" FontFamily="Calibri" FontSize="50" Click="HelpButton_Click" Content="{StaticResource Info}" />
 
-            <Button DockPanel.Dock="Right" Name="ProfileSettingsButton" Content="Profile Settings"
+            <!--<Button DockPanel.Dock="Right" Name="ProfileSettingsButton" Content="Profile Settings"
                     Style="{StaticResource ButtonStyle}" Click="ProfileSettingsButton_OnClick" />
             
             <Button DockPanel.Dock="Right" Name="AppSettingsButton" Content="Application Settings"
-                    Style="{StaticResource ButtonStyle}" Click="AppSettingsButton_OnClick" />
+                    Style="{StaticResource ButtonStyle}" Click="AppSettingsButton_OnClick" />-->
 
 
         </DockPanel>
